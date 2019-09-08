@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Главная</title>
+{% extends 'mainapp/base.html' %}
 
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
-<a href="/">Главная</a>
-<a href="/products/">Продукты</a>
-<a href="/contacts/">Контакты</a>
-<h1 class="test">Главная</h1>
-</body>
-</html>
+{% block title %}
+    <title>Главная</title>
+{% endblock %}
+
+{% block content %}
+    <h1 class="test">Главная</h1>
+    {% if username %}
+        <div style="font-size: 24px">Привет {{ username| title }}!</div>
+        <div style="font-size: 20px">Текущая дата {% now "jS F Y" %}</div>
+    {% else %}
+        <div style="font-size: 24px">Привет!</div>
+    {% endif %}
+{% endblock %}

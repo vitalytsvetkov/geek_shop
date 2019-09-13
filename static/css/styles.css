@@ -2,6 +2,10 @@
     color: red;
 }
 
-.act{
+.active{
     color: darkorange;
+}
+
+.bord{
+    border: black solid 2px;
 }

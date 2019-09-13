@@ -1,0 +1,10 @@
+<a href={% url 'main' %} {% if request.resolver_match.url_name == 'main' %}
+                        class="act"
+                      {% endif %}>Главная</a>
+<a href={% url 'products' %} {% if request.resolver_match.url_name == 'products' %}
+                        class="act"
+                      {% endif %}>Продукты</a>
+<a href={% url 'contacts' %} {% if request.resolver_match.url_name == 'contacts' %}
+                        class="act"
+                      {% endif %}>Контакты</a>
+

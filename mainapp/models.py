@@ -30,4 +30,5 @@ class Product(models.Model):
         return "{} ({})".format(self.name, self.category.name)
 
 
+
 # Create your models here.

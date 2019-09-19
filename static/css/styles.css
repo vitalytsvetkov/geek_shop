@@ -1,11 +1,7 @@
-.test{
+.test {
     color: red;
 }
 
-.active{
-    color: darkorange;
-}
-
-.bord{
-    border: black solid 2px;
+.active {
+    background-color: lightblue;
 }

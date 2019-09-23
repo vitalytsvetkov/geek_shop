@@ -11,15 +11,36 @@ def main(request):
 def products(request, pk=None):
     products = Product.objects.all()
     basket = []
-    if request.user:
-        basket = BasketSlot.objects.all()
+    if request.user.is_authenticated:
+        basket = request.user.basket.all()
 
-    if pk:
-        category = get_object_or_404(ProductCategory, pk=pk)
-        products = products.filter(category=category)
+    if pk is not None:
+        if pk > 0:
+            category = get_object_or_404(ProductCategory, pk=pk)
+            products = products.filter(category=category)
 
-    context = {'products': products, 'categories': ProductCategory.objects.all(), 'basket': basket}
-    return render(request, 'mainapp/products.html', context)
+        context = {'products': products, 'categories': ProductCategory.objects.all(), 'basket': basket}
+        return render(request, 'mainapp/products.html', context)
+    else:
+        context = {
+            'hot_product': Product.objects.filter(is_hot=True).first(),
+            'categories': ProductCategory.objects.all(),
+            'basket': basket
+        }
+        return render(request, 'mainapp/hot_product.html', context)
+
+
+def product(request, pk):
+    title = 'продукты'
+
+    content = {
+        'title': title,
+        'links_menu': ProductCategory.objects.all(),
+        'product': get_object_or_404(Product, pk=pk),
+        'basket': request.user.basket.all(),
+    }
+
+    return render(request, 'mainapp/product.html', content)
 
 
 def contacts(request):

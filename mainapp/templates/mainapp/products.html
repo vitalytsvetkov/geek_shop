@@ -1,4 +1,5 @@
 {% extends 'mainapp/base.html' %}
+{% load custom_tags %}
 
 {% block title %}
     <title>Продукты</title>
@@ -6,7 +7,8 @@
 
 {% block content %}
     <h1>Продукты</h1><br>
-    <div>Количество продуктов в корзине: {{ basket|length }}</div>
+    <div>Количество продуктов в корзине: {{ basket|basket_total_quantity }}</div>
+    <div>Общая стоимость корзины: {{ basket|basket_total_cost }} руб.</div>
     <h3>Категории</h3>
     {% include 'mainapp/includes/inc_category_menu.html' %}
     <br><br>
@@ -18,7 +20,7 @@
                       <div class="card-body">
                           <h5 class="card-title">{{ product.name }}</h5>
                           <p class="card-text">{{ product.short_desc }}</p>
-                          <a href="{% url 'basket:add' product.pk %}">Добавить в корзину</a>
+                          <a href="{% url 'products:product' product.pk %}">Добавить в корзину</a>
                           <br>
                           <a href="{% url 'basket:remove' product.pk %}">Удалить из корзины</a>
                       </div>

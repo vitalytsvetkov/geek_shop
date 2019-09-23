@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponseRedirect, get_object_or_404, render
+from django.shortcuts import HttpResponseRedirect, get_object_or_404, render, HttpResponse
 from .models import BasketSlot
 from mainapp.models import Product
 from django.contrib.auth.decorators import login_required
@@ -44,14 +44,13 @@ def remove(request, product_pk=None):
 
 @login_required
 def edit(request, pk):
-    if request.is_ajax():
-        basket_slot = get_object_or_404(BasketSlot, pk=pk)
+    basket_slot = get_object_or_404(BasketSlot, pk=pk)
 
-        quantity = int(request.GET.get('quantity'))
-        if quantity > 0:
-            basket_slot.quantity = quantity
-            basket_slot.save()
-        else:
-            basket_slot.delete()
+    quantity = int(request.GET.get('quantity'))
+    if quantity > 0:
+        basket_slot.quantity = quantity
+        basket_slot.save()
+    else:
+        basket_slot.delete()
 
-        return HttpResponse('Ok')
+    return HttpResponse('Ok')
